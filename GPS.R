@@ -83,3 +83,52 @@ vali_fam <- left_join(vali,fam.order,by="FID")
 vali_fam <- vali_fam[,c(필요한 컬럼 선택)]
 
 write.table(vali_fam,"경로",sep="\t",quote=FALSE,row.names=FALSE)
+
+
+#cortest
+cor.test(vali_fam$pred_inf,vali_fam$표현형)
+
+#lm분석
+summary(lm(표현형 ~ age + sex + bmi + array + pc1 + pc2 + pc3 + pc4 + pc5 + pc6 + pc7 + pc8 + pc9 + pc10 + pred_inf, data = vali_fam))
+ 
+
+
+
+#auc분석 
+all_env_merge_testing_data <- vali_gps_disease
+
+sample_num = sample(1:nrow(all_env_merge_testing_data), size = round(0.2 * nrow(all_env_merge_testing_data)))
+
+all_env_merge_testing_data_2 = all_env_merge_testing_data[ sample_num, ]
+all_env_merge_testing_data_8 = all_env_merge_testing_data[ -sample_num, ]
+    
+model <- glm ( as.factor(all_env_merge_testing_data_8$disease) ~ age + sex + bmi +  gps  + pc1 + pc2 + pc3 + pc4 + pc5 + pc6 +pc7+ pc8 +pc9 + pc10 + array, data = all_env_merge_testing_data_8 ,family = binomial)
+
+
+
+p <- predict(model, newdata=all_env_merge_testing_data_2,type="response")
+pr <- prediction(p,all_env_merge_testing_data_2$real_hyper)
+prf <- performance(pr,measure="tpr",x.measure="fpr")
+auc <- performance(pr,measure="auc")
+auc <- auc@y.values[[1]]
+
+#false_true check 
+
+p <- predict(model, newdata=all_env_merge_testing_data_2,type="response")
+d <- table(round(p),all_env_merge_testing_data_2$disease)
+
+
+p_v2 <- round(p)
+
+false_check <- cbind(all_env_merge_testing_data_2,p_v2)
+
+false_check_case_obesity <- false_check[false_check$disease(정답) == "2",] 
+
+false_check_case_obesity_true <- false_check_case_obesity[false_check_case_obesity$p_v2 == "1",]
+
+false_check_case_obesity_false <- false_check_case_obesity[false_check_case_obesity$p_v2 =="0",]   
+
+
+
+
+
