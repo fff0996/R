@@ -75,3 +75,11 @@ beta_inf <- snp_ldpred2_inf(corr, df_beta, h2 = h2_est)
 pred_inf <- big_prodVec( G2, beta_inf, ind.row = ind.test, ind.col = info_snp$`_NUM_ID_`)
 
 
+#validation set sample에 gps값 붙여주기 
+names(fam.order)[1] <- c("FID")
+vali <- read.csv("validation set.csv")
+vali_fam <- left_join(vali,fam.order,by="FID")
+
+vali_fam <- vali_fam[,c(필요한 컬럼 선택)]
+
+write.table(vali_fam,"경로",sep="\t",quote=FALSE,row.names=FALSE)
