@@ -78,6 +78,7 @@ pred_inf <- big_prodVec( G2, beta_inf, ind.row = ind.test, ind.col = info_snp$`_
 #validation set sample에 gps값 붙여주기 
 names(fam.order)[1] <- c("FID")
 vali <- read.csv("validation set.csv")
+fam.order <- cbind(fam.order,pred_inf)
 vali_fam <- left_join(vali,fam.order,by="FID")
 
 vali_fam <- vali_fam[,c(필요한 컬럼 선택)]
