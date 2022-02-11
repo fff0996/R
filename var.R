@@ -15,3 +15,6 @@ aggregate(hyper1_normal0 ~ tile20,aetd,var)
 library(ggplot2)
 
 plt %>% ggplot(aes(tile10,drug_SBP)) + geom_point() + geom_line()
+
+
+plot(d2$tile10,d2$abs_res,xlab=c("Decile of GPS"),ylab=c("Mean of residauls"),ylim=c(0.4,0.8))
