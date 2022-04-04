@@ -5,7 +5,7 @@ list1 <- list()
 for(i in 1:10){
   
   a <- c(1,2,3)
-  list1[[i]] <- z
+  list1[[i]] <- a
 }
 list1
 save(list1,file="list.RData")
