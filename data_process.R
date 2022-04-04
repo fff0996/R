@@ -16,3 +16,15 @@ load("list.RData")
 
 
 gapmider %>% group_by(continent,country) %>% summarize(pop_avg = mean(pop))
+
+
+#and는 &
+pa_alt["sub9"] <- ifelse(pa_alt$Group ==1 & pa_alt$tile3 ==1,1,
+ifelse(pa_alt$Group ==1 & pa_alt$tile3 ==2,2,
+ifelse(pa_alt$Group ==1 & pa_alt$tile3 == 3,3,
+ifelse(pa_alt$Group ==2 & pa_alt$tile3 ==1,4,
+ifelse(pa_alt$Group == 2 & pa_alt$tile3 == 2,5,
+ifelse(pa_alt$Group ==2 & pa_alt$tile3 == 3,6,
+ifelse(pa_alt$Group ==3 & pa_alt$tile3 ==1,7,
+ifelse(pa_alt$Group ==3 & pa_alt$tile3 == 2,8,
+ifelse(pa_alt$Group ==3 & pa_alt$tile3 == 3,9,0)
