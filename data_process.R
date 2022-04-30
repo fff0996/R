@@ -28,3 +28,16 @@ ifelse(pa_alt$Group ==2 & pa_alt$tile3 == 3,6,
 ifelse(pa_alt$Group ==3 & pa_alt$tile3 ==1,7,
 ifelse(pa_alt$Group ==3 & pa_alt$tile3 == 2,8,
 ifelse(pa_alt$Group ==3 & pa_alt$tile3 == 3,9,0)
+       )
+       )
+       )
+       )
+       )
+       )
+       )
+                         
+                         )
+#벡터원소를 역순으로 배열할때는 rev함수를 사용한다. 
+a=c(1,2,3,4,5)
+rev(a)
+# 5 4 3 2 1
