@@ -9,7 +9,7 @@ library(R.utils)
 snp_readBed("만명.bed")
 
 
-obj.bigSNP <- snp_attach("만명.rds")
+obj.bigSNP <- snp_attach("QCref2.rds")
 G   <- obj.bigSNP$genotypes
 CHR <- obj.bigSNP$map$chromosome
 POS <- obj.bigSNP$map$physical.pos
