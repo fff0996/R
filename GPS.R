@@ -71,6 +71,7 @@ df_beta <- info_snp[,c("beta", "beta_se", "n_eff", "_NUM_ID_")]
 ldsc <- snp_ldsc( ld, length(ld), chi2 = (df_beta$beta / df_beta$beta_se)^2, sample_size = df_beta$n_eff, blocks = NULL)
 h2_est <- ldsc[["h2"]]
 
+ind.test <- 1:nrow(G2)
 beta_inf <- snp_ldpred2_inf(corr, df_beta, h2 = h2_est)
 pred_inf <- big_prodVec( G2, beta_inf, ind.row = ind.test, ind.col = info_snp$`_NUM_ID_`)
 
