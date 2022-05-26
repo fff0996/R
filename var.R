@@ -18,3 +18,5 @@ plt %>% ggplot(aes(tile10,drug_SBP)) + geom_point() + geom_line()
 
 plot(d2$tile10,d2$abs_res,xlab=c("Decile of GPS"),ylab=c("Mean of residauls"),ylim=c(0.4,0.8))
 ggplot(bmi,aes(x= bmi,y= as.factor(tile10))) + geom_density_ridges()
+
+tp_2_1 <- tp_2_1[c(order(tp_2_1$Ob_Pre)),]
