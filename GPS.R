@@ -144,8 +144,8 @@ snp_fastImputeSimple <- function(
   } else {
     method <- match(match.arg(method), c("mode", "mean0", "mean2", "random"))
     print(method)
-    #impute(Gna, method, ncores)
-    #Gna$copy(code = `if`(method == 3, CODE_DOSAGE, CODE_IMPUTE_PRED))
+    impute(Gna, method, ncores)
+    Gna$copy(code = `if`(method == 3, CODE_DOSAGE, CODE_IMPUTE_PRED))
   }
 }
 
