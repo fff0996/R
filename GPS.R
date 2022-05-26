@@ -135,7 +135,7 @@ false_check_case_obesity_false <- false_check_case_obesity[false_check_case_obes
 snp_fastImputeSimple <- function(
   Gna, method = c("mode", "mean0", "mean2", "random"), ncores = 1) {
 
-  check_args()
+  #check_args()
   stopifnot(identical(Gna$code256, CODE_012))
 
   if (identical(method, "zero")) {
@@ -143,9 +143,9 @@ snp_fastImputeSimple <- function(
     Gna$copy(code = c(0, 1, 2, 0, rep(NA, 252)))
   } else {
     method <- match(match.arg(method), c("mode", "mean0", "mean2", "random"))
-    method
-    impute(Gna, method, ncores)
-    Gna$copy(code = `if`(method == 3, CODE_DOSAGE, CODE_IMPUTE_PRED))
+    print(method)
+    #impute(Gna, method, ncores)
+    #Gna$copy(code = `if`(method == 3, CODE_DOSAGE, CODE_IMPUTE_PRED))
   }
 }
 
