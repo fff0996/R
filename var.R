@@ -20,3 +20,8 @@ plot(d2$tile10,d2$abs_res,xlab=c("Decile of GPS"),ylab=c("Mean of residauls"),yl
 ggplot(bmi,aes(x= bmi,y= as.factor(tile10))) + geom_density_ridges()
 
 tp_2_1 <- tp_2_1[c(order(tp_2_1$Ob_Pre)),]
+
+#리스트 내 최빈 값 출력 함수 
+v <- c(2,1,2,3,1,2)
+getmode( v )
+#2
