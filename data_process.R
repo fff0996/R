@@ -41,3 +41,36 @@ ifelse(pa_alt$Group ==3 & pa_alt$tile3 == 3,9,0)
 a=c(1,2,3,4,5)
 rev(a)
 # 5 4 3 2 1
+
+library(data.table)
+library(dplyr)
+d <- fread('METAANALYSIS_DIAGRAM_SE1.txt')
+dim(d)
+our_bim <- fraed("../../../GPS/match_mer_vali.bim")
+our_bim <- fread("../../../GPS/match_mer_vali.bim")
+dim(our_bim)
+head(our_bim)
+head(d)
+V7 <- paste(our_bim$V1,our_bim$V4,sep=":")
+head(V7)
+our_bim[V7] <- V7
+our_bim <- data.table(our_bim)
+our_bim[V7] <- V7
+V7 <- data.frame(V7)
+our_bim[V7] <- V7
+head(V7)
+our_bim["V7"] <- V7
+sibal <- cbind(our_bim,V7)
+head(sibal)
+library(dplyr)
+names(d)[1] <- c("V7")
+head(d)
+mer <- left_join(sibal,d,by="V7")
+head(mer)
+mer2 <- na.omit(mer)
+dim(mer2)
+dim(mer)
+history(Inf)
+history(Inf)
+
+
