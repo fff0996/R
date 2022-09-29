@@ -1,17 +1,11 @@
-
-
 args = commandArgs(trailingOnly=TRUE)
 
 library(dplyr)
-
-#exit <- function() {
-#	  .Internal(.invokeRestart(list(NULL, NULL), NULL))
-#}
-
+#PRS trait
 trait <- args[1]
-
+#Result of PRS
 GPS <- args[2]
-
+#Disease_FID_dictionary
 Disease <- args[3]
 
 GPS <- read.csv(GPS,sep="\t")
@@ -62,14 +56,6 @@ normal_high_sample <- rbind(normal_sample,high_sample)
 dic <- read.csv(Disease,sep="\t")
 
 
-#Disease_case <- args[4]
-#Disease_control <- args[5]
-
-
-#Disease_case <- read.csv(Disease_case,sep="\t")
-#Disease_control <- read.csv(Disease_control,sep="\t")
-
-#names <- names(Disease_case)
 
 
 ICD10 <- dimnames(dic)[[1]]
@@ -111,55 +97,6 @@ for (r in 1:nrow(dic)){
 		next
 	}
 }
-#if(is.element("FID",names)){
-#	Disease_case <- Disease_case[,c("FID","FID")]
-#	names(Disease_case)[2] <- c("IID")
-#	Disease_case[ICD10] = 2
-
-#}else{
-#	print("Disease case file  columns not have FID")
-	#exit()
-#}
-
-#names <- names(Disease_control)
-#if(is.element("FID",names)){
-#	Disease_control <- Disease_control[,c("FID","FID")]
-#	names(Disease_control)[2] <- c("IID")
-#	Disease_control[ICD10] = 1
-#}else{
-#	print("Disease control file columns not have FID")
-	#exit()
-#}
-
-
-#Disease_sample <- rbind(Disease_case,Disease_control)
-
-
-#normal_high_Disease_sample <- left_join(normal_high_sample,Disease_sample,by="FID")
-
-#names <- names(normal_high_Disease_sample)
-#if(is.element("sex.x",names)){
-#	names(normal_high_Disease_sample)[names == "sex.x"] <- c("sex")
-#}
-
-#names(normal_high_Disease_sample)
-#a <- normal_high_Disease_sample$ICD10
-#print(a)
-#index <- which(names == ICD10)
-#beta <- summary(glm(as.factor(normal_high_Disease_sample[[index]]) ~as.factor(normal_high_Disease_sample$nor_high) + normal_high_Disease_sample$array + pc1 + pc2 + pc3 + pc4 + pc5 + pc6 + pc7 + pc8 + pc9 + pc10 + age + sex ,data=normal_high_Disease_sample,family = binomial))$coef["as.factor(normal_high_Disease_sample$nor_high)2",1]
-
-
-#Pvalue <- summary(glm(as.factor(normal_high_Disease_sample[[index]]) ~as.factor(normal_high_Disease_sample$nor_high) + normal_high_Disease_sample$array + pc1 + pc2 + pc3 + pc4 + pc5 + pc6 + pc7 + pc8 + pc9 + pc10 + age + sex ,data=normal_high_Disease_sample,family = binomial))$coef["as.factor(normal_high_Disease_sample$nor_high)2",4]
-#print(exp(beta))
-#df <- DataFrame(Normal = normal_pro,High = high_pro)
-
-#write.table(df,"result.txt",sep="\t",quote=FALSE,row.names=FALSE)
-
-#print(paste(ICD10,trait,exp(beta),Pvalue))
-#	print(paste(ICD10,high_pro,trait,"high group"))
-#}else{
-	
-
 
 
 
