@@ -59,7 +59,7 @@ for (chr in 1:22) {
 }
 
 
-obj.bigSNP <- snp_attach("validation.rds")
+obj.bigSNP <- snp_attach("match_mer_vali.rds")
 G   <- obj.bigSNP$genotypes
 CHR <- obj.bigSNP$map$chromosome
 POS <- obj.bigSNP$map$physical.pos
