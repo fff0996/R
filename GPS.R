@@ -153,7 +153,7 @@ snp_fastImputeSimple <- function(
 
 for (i in ind){
 
-    vali <- read.csv(paste("/BiO/Hyein/90Traits/validation/check/val_X",v[i],".0.0.txt",sep=""),sep="\t")
+    vali <- read.csv(paste("/BiO/Hyein/90Traits/validation/1_check/val_X",v[i],".0.0.txt",sep=""),sep="\t")
     sumstats <- read.csv(paste("/BiO/Hyein/90Traits/result_gwas/overall/tmp/",s[i],sep=""),sep="\t")
     if (names(sumstats)[1] == "X.CHROM"){
         sumstats2 <- sumstats[,c(1,3,2,5,4,9,10,12,8)]
