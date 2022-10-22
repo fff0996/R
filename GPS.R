@@ -149,3 +149,54 @@ snp_fastImputeSimple <- function(
   }
 }
 
+
+
+for (i in ind){
+
+vali <- read.csv(paste("/BiO/Hyein/90Traits/validation/check/val_X",v[i],".0.0.txt",sep=""),sep="\t")
+sumstats <- read.csv(paste("/BiO/Hyein/90Traits/result_gwas/overall/tmp/",s[i],sep=""),sep="\t")
+if (names(sumstats)[1] == "X.CHROM"){
+sumstats2 <- sumstats[,c(1,3,2,5,4,9,10,12,8)]
+names(sumstats2) <- c("chr","rsid","pos","a0","a1","beta","beta_se","p","n_eff")
+}
+else{
+sumstats2 <- sumstats
+}
+obj.bigSNP <- snp_attach("QCref2.rds")
+
+
+map <- obj.bigSNP$map[-(2:3)]
+names(map) <- c("chr", "pos", "a0", "a1")
+info_snp <- snp_match(sumstats2, map)
+
+NCORES <- nb_cores()
+
+obj.bigSNP <- snp_attach("match_mer_vali.rds")
+fam.order <- as.data.table(obj.bigSNP$fam)
+setnames(fam.order, c("family.ID", "sample.ID"), c("FID", "IID"))
+df_beta <- info_snp[,c("beta", "beta_se", "n_eff", "_NUM_ID_")]
+ldsc <- snp_ldsc( ld, length(ld), chi2 = (df_beta$beta / df_beta$beta_se)^2, sample_size = df_beta$n_eff, blocks = NULL)
+h2_est <- ldsc[["h2"]]
+
+ind.test <- 1:nrow(G2)
+beta_inf <- snp_ldpred2_inf(corr, df_beta, h2 = h2_est)
+pred_inf <- big_prodVec( G2, beta_inf, ind.row = ind.test, ind.col = info_snp$`_NUM_ID_`)
+
+
+
+names(fam.order)[1] <- c("FID")
+ 
+fam.order <- cbind(fam.order,pred_inf)
+vali_fam <- left_join(vali,fam.order,by="FID")
+p <- list.files(paste("/BiO/Hyein/90Traits/BT/QT_BT/QT/",v[i],sep=""))
+pre <- p[1]
+pre <- read.csv(paste("/BiO/Hyein/90Traits/BT/QT_BT/QT/",v[i],"/",pre,sep=""),sep="\t")
+c <-cor.test(vali_fam$pred_inf,pre$pred_inf)$estimate
+print(i)
+print(c)
+if(c < 0.99){
+print(c)
+write.table(vali_fam,paste("/BiO/Hyein/90Traits/BT/QT_BT/QT/",v[i],"/",v[i],".0.0.txt",sep=""),sep="\t",quote=FALSE,row.names=FALSE)
+}
+}
+
