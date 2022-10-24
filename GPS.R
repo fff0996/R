@@ -195,15 +195,17 @@ for (i in ind){
         print(paste("FI : ",v[i],sep=""))
         if(c < 0.99){
             
+            print(paete("Trait : ",v[i]," Summary: ",s[i],sep=""))
             print(paste("correlation: ",c,sep=""))
             print("Generate new result ")
             write.table(vali_fam,paste("/BiO/Hyein/90Traits/BT/QT_BT/QT/",v[i],"/",v[i],".0.0.txt",sep=""),sep="\t",quote=FALSE,row.names=FALSE)
         }else{
+            print(paete("Trait : ",v[i]," Summary: ",s[i],sep=""))
             print(paste("correlation: ",c,sep=""))
             print("Not generate new result")
             }
     }else{
-        print(paste("FI: ",v[i],sep=""))
+        print(paete("Trait : ",v[i]," Summary: ",s[i],sep=""))
         print("Sample size not same! Generate new result")
         write.table(vali_fam,paste("/BiO/Hyein/90Traits/BT/QT_BT/QT/",v[i],"/",v[i],".0.0.txt",sep=""),sep="\t",quote=FALSE,row.names=FALSE)
         
