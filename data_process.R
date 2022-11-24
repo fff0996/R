@@ -72,5 +72,5 @@ dim(mer2)
 dim(mer)
 history(Inf)
 history(Inf)
-
+df <- r[-which(duplicated(r$SNP)),]
 
