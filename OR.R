@@ -43,7 +43,7 @@ for (t in trait){
                 eid <- unlist(dic[i,])
                 names(eid) <- NULL
                 eid <- eid[! eid %in% -9]
-                if(length(eid != 0){
+                if(length(eid != 0)){
                         case <- data.frame(eid)
                         #names(case)[2] <- c("IID")
                         case["disease"] <- 2
