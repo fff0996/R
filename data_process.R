@@ -74,3 +74,7 @@ history(Inf)
 history(Inf)
 df <- r[-which(duplicated(r$SNP)),]
 
+
+library(stringr)
+str_sub(t,1,-2)
+
