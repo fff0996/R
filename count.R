@@ -16,7 +16,7 @@ vali_eid <- read.csv("/BiO/Hyein/90traits/validation/root_vali_eid.txt",sep="\t"
 
 #paste gps result
 for ( i in QT){
-	gps <- read.csv(paste("/BiO/Hyein/90traits/BT/QT_BT/2nd_validation_GWAS/44_GPS_outcome/X",i,sep=""))
+	gps <- read.csv(paste("/BiO/Hyein/90Traits/BT/QT_BT/2nd_validation_GWAS/44_GPS_outcome/X",i,sep=""))
 	gps <- gps[,c(1,7)]
 	names(gps)[2] <- c(paste("pred_inf_",i,sep=""))
 	vali_eid <- left_join(vali_eid,gps,by="FID")
@@ -28,28 +28,32 @@ for ( i in QT){
 start <-18
 end <- 18 + length(QT)-1
 
-for ( i in 1:nrow(vali_eid)){
-	sc <- scale(vali_eid[i,start])
+for ( i in QT){
+	sc <- scale(vali_eid[,start])
 	vali_eid <- vali_eid %>% mutate(tile100 = ntile(sc,100))
 	names(vali_eid)[end+1] <- c(paste("tile100_",i,sep=""))
 	start <- start + 1
 	end <- end + 1
 }
+
+
 start <- 18 + length(QT)
 end <- start + length(QT) -1 
 
 tmp <- vali_eid[,c(1,17,start:end)]
 
+#paste case
 case["case"] <- 2
 names(case)[1] <- c("eid")
 
 tmp <- left_join(tmp,case,by="eid")
 
 tmp[is.na(case),]$case <- 1
+tmp <- tmp %>% mutate(Case = ifelse(is.na(case),1,case))
 
 cnt <- rep(1:length(QT))
 
-for ( i in 1:legth(QT)){
+for ( i in 1:length(QT)){
 	assign(paste("FID_",i,sep=""),vector())
 	assign(paste("case_",i,sep=""),vector())
 }
