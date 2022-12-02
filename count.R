@@ -15,8 +15,8 @@ QT <- readLines(QT)
 vali_eid <- read.csv("/BiO/Hyein/90traits/validation/root_vali_eid.txt",sep="\t")
 
 #paste gps result
-for ( i in 1:length(QT)){
-	gps <- read.csv(paste("/BiO/Hyein/90traits/BT/QT_BT/2nd_validation_GWAS/44_GPS_outcome/X",i,sep=""),sep="\t")
+for ( i in QT){
+	gps <- read.csv(paste("/BiO/Hyein/90traits/BT/QT_BT/2nd_validation_GWAS/44_GPS_outcome/X",i,sep=""))
 	gps <- gps[,c(1,7)]
 	names(gps)[2] <- c(paste("pred_inf_",i,sep=""))
 	vali_eid <- left_join(vali_eid,gps,by="FID")
