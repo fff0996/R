@@ -1,4 +1,5 @@
-
+#문자열을 변수명으로 인식
+eval(parse(text = x[i]))
 qnorm((rank(x,na.last="keep")-0.5)/sum(!is.na(x)))
 
 st_pred_inf <- scale(tg$pred_inf)
