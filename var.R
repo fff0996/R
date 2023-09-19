@@ -28,3 +28,4 @@ getmode( v )
 #2
 mer <- mer %>% mutate(t2d = ifelse(is.na(T2D),0,T2D))
 b <- transform(b, `Fixed-effects_p-value` = as.numeric(`Fixed-effects_p-value`))
+eval(parse(text = x[i]))
